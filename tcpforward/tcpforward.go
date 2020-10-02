@@ -8,6 +8,7 @@ type ConnReadWrite interface {
 }
 
 type Server struct {
+	tcpServer    *gtcp.Server
 	addr         string
 	forwardAddr  string
 	srcReadWrite ConnReadWrite

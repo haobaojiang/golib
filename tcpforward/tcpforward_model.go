@@ -46,5 +46,10 @@ func (Self *Server) handleConn(src *gtcp.Conn) {
 }
 
 func (Self *Server) Serve() error {
-	return gtcp.NewServer(Self.addr, Self.handleConn).Run()
+	Self.tcpServer = gtcp.NewServer(Self.addr, Self.handleConn)
+	return Self.tcpServer.Run()
+}
+
+func (Self *Server) Close() error {
+	return Self.tcpServer.Close()
 }
