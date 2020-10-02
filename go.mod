@@ -1,3 +1,5 @@
-module golib
+module github.com/haobaojiang/golib
 
-require github.com/gogf/gf v1.13.7
+go 1.11
+
+require github.com/gogf/gf v1.11.7
