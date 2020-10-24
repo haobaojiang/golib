@@ -25,10 +25,14 @@ func (Self *Server) copyData(src, dst *gtcp.Conn, srcReader, dstReader ConnReadW
 			break
 		}
 	}
-
 }
 
 func (Self *Server) handleConn(src *gtcp.Conn) {
+
+	Self.connectedCount++
+	defer func() {
+		Self.connectedCount--
+	}()
 
 	dst, err := gtcp.NewConn(Self.forwardAddr, time.Second*3)
 	if err != nil {
@@ -48,6 +52,10 @@ func (Self *Server) handleConn(src *gtcp.Conn) {
 func (Self *Server) Serve() error {
 	Self.tcpServer = gtcp.NewServer(Self.addr, Self.handleConn)
 	return Self.tcpServer.Run()
+}
+
+func (Self *Server) ConnectedCount() int {
+	return Self.connectedCount
 }
 
 func (Self *Server) Close() error {

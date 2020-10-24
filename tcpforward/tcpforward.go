@@ -13,6 +13,9 @@ type Server struct {
 	forwardAddr  string
 	srcReadWrite ConnReadWrite
 	dstReadWrite ConnReadWrite
+
+	//
+	connectedCount int
 }
 
 func New(addr string, forwardAddr string, srcReadwrite ConnReadWrite, dstReadWrite ConnReadWrite) *Server {
